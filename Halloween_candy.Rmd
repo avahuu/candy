@@ -1,0 +1,125 @@
+---
+title: "Halloween Candy Practice"
+author: "Ava"
+date: "2025-10-28"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r library}
+library(tidyverse) 
+library(dplyr) 
+library(ggplot2) 
+library(knitr) 
+library(psych)
+library(tidycensus)
+```
+
+```{r}
+candy <- read_csv('candydata.csv', col_names = TRUE)
+
+```
+
+**Select**
+
+
+
+```{r}
+#Select chocolate, caramel and sugarpercent 
+candy %>% select(chocolate,caramel,sugarpercent) %>% 
+  arrange(desc(sugarpercent))
+```
+
+**Arrange**
+
+```{r}
+  candy %>% select(chocolate,caramel,sugarpercent) %>% 
+              arrange((sugarpercent)) 
+
+## default is ascedning 
+```
+
+
+
+**Filter**
+
+How many chocolate?
+
+  candy %>% select(chocolate,caramel,sugarpercent) %>% 
+  filter(chocolate == 1)
+
+How many are chocolate and caramel?
+```{r}
+  candy %>% select(chocolate,caramel,sugarpercent) %>% 
+  filter(chocolate == 1, caramel == 1)
+```
+
+
+How many are chocolate or caramel?
+```{r}
+  candy %>% select(chocolate,caramel,sugarpercent) %>% 
+  filter(chocolate == 1 | caramel == 1)
+```
+
+
+**Combine commands - connect with %>% **
+
+Is candy that is pluribus more expensive?
+
+  candy %>% 
+      group_by(pluribus) %>% 
+      summarise(count=n(),mean = mean(pricepercent))   
+
+```{r}
+candy %>% 
+  group_by(pluribus) %>% 
+  summarise(count=n(),mean = mean(pricepercent))
+```
+
+### Practice
+
+Is caramel more expensive?
+Yes!
+```{r}
+candy %>% 
+  group_by(caramel) %>% 
+  summarise(count=n(),mean = mean(pricepercent))
+```
+
+Is there more chocolate or non-chocolate?
+Non-Chocolate
+
+```{r}
+candy %>% 
+  group_by(chocolate) %>% 
+  summarise(count=n())
+```
+
+
+What is the winning-est fruit candy?
+44.11% 
+
+```{r}
+candy %>% 
+  group_by(fruity) %>% 
+  summarise(count=n(),mean = mean(winpercent))
+```
+
+
+## Plotting
+
+**Basic plots**
+  plot(candy$sugarpercent,candy$winpercent)
+  
+
+**Fancier plots**
+
+  ggplot(
+    data = candy,
+    mapping = aes(x = sugarpercent, y = winpercent, color = chocolate)
+  ) +
+    geom_point()
+  
