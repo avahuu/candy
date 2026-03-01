@@ -116,10 +116,13 @@ candy %>%
   
 
 **Fancier plots**
-
+```{r}
   ggplot(
     data = candy,
     mapping = aes(x = sugarpercent, y = winpercent, color = chocolate)
   ) +
     geom_point()
   
+```
+
+
