@@ -1,5 +1,7 @@
 # Candy Power Ranking
 
+🔗 **[View the visualization](https://avahuu.github.io/candy/Halloween_candy.html)**
+
 This folder contains the data behind the story [The Ultimate Halloween Candy Power Ranking](http://fivethirtyeight.com/features/the-ultimate-halloween-candy-power-ranking/).
 
 `candy-data.csv` includes attributes for each candy along with its ranking. For binary variables, 1 means yes, 0 means no.
